@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
+// import { Adderare } from './components/Componenten';
+import { UserForm } from './components/UserForm.jsx';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+
+  const [userList, setUserLists] = useState([])
+
+  const addUserToList = (user) => {
+    setUserLists([...userList, user])
+  }
+
+  const html = userList.map((user) => {
+    return <>
+      <p>{user.firstname}</p>
+      <p>{user.age}</p>
+    </>
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserForm addUser={addUserToList} />
+      {html}
     </div>
   );
 }
